@@ -1,4 +1,3 @@
-
 // 1. DATA REPOSITORY: Your curated digital garden elements
 const gardenData = [
     {
@@ -6,7 +5,7 @@ const gardenData = [
         type: "Quote / Text Clipping",
         typeClass: "bg-amber-50 text-amber-700 border-amber-200",
         source: "The Agile Creator Manifesto",
-        platform: "via Substack",
+        platform: "Internal Workspace Log",
         content: '"I operate on an agile production model. I don\'t build monuments; I ship Capsules. Every rapid era is a themed version drop. When the sprint closes, the catalog locks."',
         meta: "⌥ Remixed 3x"
     },
@@ -15,7 +14,7 @@ const gardenData = [
         type: "Visual Identity",
         typeClass: "bg-purple-50 text-purple-700 border-purple-200",
         source: "Color Profile Anchor",
-        platform: "Instagram Feed Layer",
+        platform: "Active Media Index",
         content: "[Aesthetic Stem: 3D Glitch Render Loop .mp4] <br><br>Color configuration profile anchor for Era 04. Blending deep violet (#2a0845) with retro CRT neon scan lines.",
         meta: "★ Active Asset"
     },
@@ -24,7 +23,7 @@ const gardenData = [
         type: "Theory / Research Link",
         typeClass: "bg-blue-50 text-blue-700 border-blue-200",
         source: "Stuart Brown's Archetypes of Play",
-        platform: "via Wikipedia",
+        platform: "Concept Architecture Guide",
         content: "Analyzing the structural, thematic overlaps between the 'Explorer' play profile and modern agile software versioning deployment cycles.",
         meta: "★ Starred v1.2"
     }
@@ -119,7 +118,7 @@ function setupEventHandlers() {
     const closeModal = () => document.getElementById('stem-modal').classList.add('hidden');
     document.getElementById('close-modal').addEventListener('click', closeModal);
     
-    // Close modal if user clicks grayed backdrop container out-of-bounds
+    // Close modal if user clicks out-of-bounds
     document.getElementById('stem-modal').addEventListener('click', (e) => {
         if (e.target.id === 'stem-modal') closeModal();
     });
