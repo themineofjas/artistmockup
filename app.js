@@ -58,6 +58,8 @@ function initApplication() {
 
 function renderGardenGrid() {
     const grid = document.getElementById('garden-grid');
+    if (!grid) return;
+    
     grid.innerHTML = gardenData.map(card => `
         <article class="sublime-card p-5 rounded-xl shadow-sm flex flex-col justify-between space-y-4 cursor-pointer" onclick="openStemModal('${card.id}')">
             <div class="space-y-2">
@@ -79,6 +81,8 @@ function renderGardenGrid() {
 
 function renderCatalog() {
     const list = document.getElementById('catalog-list');
+    if (!list) return;
+
     list.innerHTML = catalogData.map(era => `
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-3 bg-neutral-50/50 border border-[#eae7e4] rounded-lg hover:bg-neutral-50 transition-colors gap-3">
             <div class="flex items-center gap-3">
@@ -116,29 +120,35 @@ function openStemModal(id) {
 
 function setupEventHandlers() {
     const closeModal = () => document.getElementById('stem-modal').classList.add('hidden');
-    document.getElementById('close-modal').addEventListener('click', closeModal);
     
-    // Close modal if user clicks out-of-bounds
-    document.getElementById('stem-modal').addEventListener('click', (e) => {
-        if (e.target.id === 'stem-modal') closeModal();
-    });
+    const closeBtn = document.getElementById('close-modal');
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    
+    const modalBg = document.getElementById('stem-modal');
+    if (modalBg) {
+        modalBg.addEventListener('click', (e) => {
+            if (e.target.id === 'stem-modal') closeModal();
+        });
+    }
 
-    // Quick Action simulation placeholder trigger
-    document.getElementById('add-clip-btn').addEventListener('click', () => {
-        const textPrompt = prompt("Clip a quick thought, link, or theory token into your Garden:");
-        if (textPrompt) {
-            gardenData.unshift({
-                id: `clip-${Date.now()}`,
-                type: "Clipped Insight Note",
-                typeClass: "bg-neutral-50 text-neutral-700 border-neutral-200",
-                source: "Manual Capture Drop",
-                platform: "via Quick Clip",
-                content: `"${textPrompt}"`,
-                meta: "★ Freshly Planted"
-            });
-            renderGardenGrid();
-        }
-    });
+    const addBtn = document.getElementById('add-clip-btn');
+    if (addBtn) {
+        addBtn.addEventListener('click', () => {
+            const textPrompt = prompt("Clip a quick thought, link, or theory token into your Garden:");
+            if (textPrompt) {
+                gardenData.unshift({
+                    id: `clip-${Date.now()}`,
+                    type: "Clipped Insight Note",
+                    typeClass: "bg-neutral-50 text-neutral-700 border-neutral-200",
+                    source: "Manual Capture Drop",
+                    platform: "via Quick Clip",
+                    content: `"${textPrompt}"`,
+                    meta: "★ Freshly Planted"
+                });
+                renderGardenGrid();
+            }
+        });
+    }
 }
 
 // Start application process upon structural asset resolution
